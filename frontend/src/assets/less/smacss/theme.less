@@ -1,19 +1,29 @@
 .navigation-block{
-    display: flex;
-    justify-content: center;
-    ul.navigation-nav{
+    ul{
         display: flex;
         justify-content: space-around;
-        align-items: center;
-        max-width: 500px;
-        width: 100%;
-        li{
-            
-        }
-        a{
+
+        li > a{
+            padding: 25px 15px;
+            display: block;
             color: #fff;
             text-decoration: none;
-            font-weight: 600;
         }
+
+        li > a.active-link{
+            background: #163167;
+        } 
+    }
+}
+#map{
+    width : 100%;
+    height: 92vh;
+    
+    .dg-control-round{
+        background: #3b5997;
+    }
+
+    .leaflet-marker-icon{
+        margin-top: -35px !important;
     }
 }

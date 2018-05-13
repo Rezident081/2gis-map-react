@@ -5,10 +5,11 @@ import Main from './Pages/Main'
 import About from './Pages/About_me'
 import SignIn from './Pages/Sign_in'
 
+
 class App extends Component {
     render() {
         return (
-            <div className='container'>
+            <div className='wrapper'>
                 <Router>
                     <Fragment>
                         <Navigation />
