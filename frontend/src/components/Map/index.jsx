@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DG from '2gis-maps';
 import { addMarker } from '../../store/actions';
+import Marker from './components/Marker';
 import { connect } from 'react-redux';
 import markerImg from '../../assets/img/location-pin.png';
 
@@ -9,41 +10,38 @@ class Map extends Component {
 
     constructor(){
         super();
-        this.map = null;
-    }
-
-    componentDidMount(){
-        this.map = DG.map('map', { 'center': [46.47, 30.73], 'zoom': 15 });
-        DG.control.location().addTo(this.map);
-
-        this.map.addEventListener('click', this.addMarker.bind(this));
-    }
-
-    addMarker(e){
-        try{
-
-            const { lat, lng } = e.latlng;
-            const myIcon = this.getMarkerIcon({ iconUrl: markerImg, iconSize: [36, 36] });
-
-            DG.marker([ lat, lng ], {icon: myIcon}).addTo(this.map);
-            this.props.dispatch(addMarker(lat, lng));
-
-        }catch(err){
-            console.error(err);
+        this.state = {
+            map : null
         }
     }
 
-    getMarkerIcon(props){
-        return DG.icon(props);
+    componentDidMount(){
+        this.getMap().then(m => {
+            this.setState({map : m});
+            this.setMapLocation(m);
+        });
     }
 
-
-    render() {
-        return (
-            <div id='map'>123</div>
-        );
+    getMap(){
+        return new Promise( ( res ) => {
+            const initMap = DG.map('map', { 'center': [46.47, 30.73], 'zoom': 15 })
+            res(initMap);
+        })
     }
 
+    setMapLocation(map){
+        DG.control.location().addTo(map);
+    }
+
+    render(){
+        return(
+            <div id='map'>
+                {this.state.map && 
+                    <Marker test = {this.state.map}/>
+                }
+            </div>
+        )
+    }
 }
 
 function mapStateToProps(state) {
