@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import Map from '../../Map/'
+import Map from '../../Map/';
+import Toolbar from '../../Toolbar';
 
 class Main extends Component {
     render() {
         return (
-            <Map />
+            <div className="main-container">
+                <Toolbar />
+                <Map />
+            </div>
         );
     }
 }
