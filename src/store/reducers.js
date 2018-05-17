@@ -7,7 +7,7 @@ function markers(state = defaultState, action){
             return Object.assign(
                  {}, 
                  state, 
-                 { maps: state.maps.concat({id:state.maps.length + 1, lat : action.lat, lng: action.lng}) }            
+                 { coords: state.coords.concat({id:state.coords.length + 1, lat : action.lat, lng: action.lng}) }            
             )
         default:
             return state;
